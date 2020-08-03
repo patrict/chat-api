@@ -1,24 +1,37 @@
-# Lumen PHP Framework
+# Chat API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+This is a very simple chat application API that will allow a user to:
+1. Send a simple text message to another user.
+2. Get the messages sent to them and see the author of those messages.
+3. Mark messages as having been read.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Requirements:
+1. PHP >= 7.2.5
+2. PHP SQLite3
 
-## Official Documentation
+## Getting Started
+1. Clone the chat API repo 
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+2. Update the *DB_DATABASE* value in the *.env* file to reflect the **absolute path** to the database file in your environment.
 
-## Contributing
+3. Run the following command from the chat-api folder:  
+php -S localhost:8000 -t public
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+You should now be able to run the API requests against your local environment.
 
-## Security Vulnerabilities
+## Authorisation:
+All requests require an *api_token* request header attribute to be passed along with the request.  
+This token can be found in the users table, and would typically be passed to the front-end during authentication.
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Rate Limiting:
+Requests are throttled per domain and IP address.  
+This limit can be configured in *routes/web.php* and applies to the entire routing group.
 
-## License
+## Database Migrations & Seeding
+Migrations and seeding factories have been provided for use with artisan.
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+To create a clean database, run:  
+*php artisan migrate:refresh*
+
+To re-seed the database, run:  
+*php artisan db:seed*
